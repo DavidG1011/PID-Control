@@ -8,9 +8,9 @@
 using json = nlohmann::json;
 
 // For converting back and forth between radians and degrees.
-constexpr double pi() { return M_PI; }
-double deg2rad(double x) { return x * pi() / 180; }
-double rad2deg(double x) { return x * 180 / pi(); }
+//constexpr double pi() { return M_PI; }
+//double deg2rad(double x) { return x * pi() / 180; }
+//double rad2deg(double x) { return x * 180 / pi(); }
 
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
@@ -35,8 +35,19 @@ int main()
   PID steer_pid;
   PID throttle_pid;
 
-  steer_pid.Init(0.1, 0.0005, 3.1);
-  throttle_pid.Init(0.32, 0.0000, 0.02);
+  // values chosen from lectures and then tuned to work well with model.
+
+  // P: Proportional - Steer proportional to the cross track error or CTE multiplied by a factor of Tau.
+    // Allows you to turn in relation to your desired location.
+  // I: Integral - Steer proportional to the sum of all CTEs. Used to correct for large errors so they do not impact the
+    // system motion over time.
+  // D: Derivative -  Gradually counter-steers to avoid overshooting the target destination or oscillations associated
+    // with over-steer.
+
+  // Initial values chosen from lectures and then tuned to work well with model.
+
+  steer_pid.Init(0.1, 0.0005, 3.8);
+  throttle_pid.Init(0.32, 0.0, 0.02);
 
   h.onMessage([&steer_pid, &throttle_pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode)
   {
@@ -55,29 +66,26 @@ int main()
           //double speed = std::stod(j[1]["speed"].get<std::string>());
           //double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
+
           double throttle;
           double max = 0.65;
 
           /*
-          * TODO: Calcuate steering value here, remember the steering value is
-          * [-1, 1].
+          * steering min/max [-1, 1].
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
 
+          // Update error and calculate total error.
           steer_pid.UpdateError(cte);
           steer_value = steer_pid.TotalError();
 
           // Contain steering values to be within -1 - 1
-          if (steer_value > 1.0)
-          {
-              steer_value = 1;
-          }
-          if (steer_value < -1.0)
-          {
-              steer_value = -1;
-          }
+          if (steer_value > 1.0) steer_value = 1;
+          if (steer_value < -1.0) steer_value = -1;
 
+          // Update error and calculate total error.
+          // car stays on track with abs() but runs off with fabs()?
           throttle_pid.UpdateError(abs(cte));
           throttle = throttle_pid.TotalError() + max;
 

@@ -5,7 +5,7 @@ Rubric [Here](https://review.udacity.com/#!/rubrics/824/view).
 
 ---
 
-# PID Definition and Paramaters
+## PID Definition and Paramaters
 
 PID stands for:
 
@@ -43,6 +43,10 @@ Throttle:
 These values were chosen by initially using lecture values, then tuning them to be more accurate for the simulator model.
 
 ---
+
+## Video
+
+A video of an autonomous lap using this PID model can be found in the root directory of this repository. [Link](https://github.com/DavidG1011/Udacity-PID-Control/blob/master/AutonomousFullTrack.mp4)
 
 ## Dependencies
 

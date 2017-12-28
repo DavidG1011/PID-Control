@@ -48,6 +48,8 @@ These values were chosen by initially using lecture values, then tuning them to 
 
 A video of an autonomous lap using this PID model can be found in the root directory of this repository. [Link](https://github.com/DavidG1011/Udacity-PID-Control/blob/master/AutonomousFullTrack.mp4)
 
+---
+
 ## Dependencies
 
 * cmake >= 3.5

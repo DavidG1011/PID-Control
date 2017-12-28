@@ -3,25 +3,25 @@ Self-Driving Car Engineer Nanodegree Program
 
 Rubric [Here](https://review.udacity.com/#!/rubrics/824/view).
 
---
+---
 
 # PID Definition and Paramaters
 
 PID stands for:
 
-P: Proportional.
+- P: Proportional.
 
-I: Integral.
+- I: Integral.
 
-D: Derivative. 
+- D: Derivative. 
 
 Further information and how PID is used in this model:
 
 - P: Proportional - Steer proportional to the cross track error or CTE multiplied by a factor of Tau. Turns in relation to your desired location.
 
-I: Integral - Steer proportional to the sum of all CTEs. Used to correct for system bias that would normally prevent the car from reaching the desired location.
+- I: Integral - Steer proportional to the sum of all CTEs. Used to correct for system bias that would normally prevent the car from reaching the desired location.
 
-D: Derivative -  Gradually introduces counter-steer to avoid overshooting the target destination or to reduce oscillations associated
+- D: Derivative -  Gradually introduces counter-steer to avoid overshooting the target destination or to reduce oscillations associated
 with over-steer.
 
 The equation in code is:
@@ -31,18 +31,18 @@ The equation in code is:
 The paramater values I chose for my model are the following:
 
 Steering:
-P: 0.1
-I: 0.0005
-D: 3.8
+- P: 0.1
+- I: 0.0005
+- D: 3.8
 
 Throttle:
-P: 0.32
-I: 0.0
-D: 0.02
+- P: 0.32
+- I: 0.0
+- D: 0.02
 
 These values were chosen by initially using lecture values, then tuning them to be more accurate for the simulator model.
 
---
+---
 
 ## Dependencies
 

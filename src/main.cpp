@@ -38,11 +38,11 @@ int main()
   // values chosen from lectures and then tuned to work well with model.
 
   // P: Proportional - Steer proportional to the cross track error or CTE multiplied by a factor of Tau.
-    // Allows you to turn in relation to your desired location.
-  // I: Integral - Steer proportional to the sum of all CTEs. Used to correct for large errors so they do not impact the
-    // system motion over time.
-  // D: Derivative -  Gradually counter-steers to avoid overshooting the target destination or oscillations associated
-    // with over-steer.
+    // Turns in relation to your desired location.
+  // I: Integral - Steer proportional to the sum of all CTEs. Used to correct for system bias that would normally prevent the car 
+    // from reaching the desired location.
+  // D: Derivative -  Gradually introduces counter-steer to avoid overshooting the target destination or to reduce oscillations 
+    // associated with over-steer.
 
   // Initial values chosen from lectures and then tuned to work well with model.
 
